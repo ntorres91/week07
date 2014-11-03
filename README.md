@@ -1,4 +1,4 @@
 week07
 ======
 
-Daily Projects 
+Daily Projects with Solid Design Principles
