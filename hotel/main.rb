@@ -1,5 +1,5 @@
 require "csv"
-require_relative "non_existent_record"
+require_relative "null_record"
 require_relative "database"
 require_relative "record"
 body = File.open("hotels.csv", "r")
@@ -20,7 +20,7 @@ while input != "t"
 
   find_input = table.find { |entry| entry[:hotel] == input }
 
-  record = Record.new(find_input) || NonExistentRecord.new
+  record = Record.new(find_input) || NullRecord.new
 
   puts record.to_s 
 end
