@@ -1,34 +1,72 @@
 class RPS
-  PLAYER_WIN ="Player wins"
-  AI_WIN ="AI wins"
-  TIE_GAME = "TIE"
 
-  OUTCOMES={
-    %w{R R} => "TIE_GAME"
-    %w{R P} => "AI_WIN",
-    %w{R S} => "PLAYER_WIN",
-    %w{P P} => "TIE_GAME",
-    %w{P S} => "AI_WIN",
-    %w{P R} => "PLAYER_WIN",
-    %w{S S} => "TIE_GAME",
-    %w{S R} => "AI_WIN",
-    %w{S P} => "PLAYER_WIN"
+  RESULTS={
+    win: "player wins",
+    loss: "Ai wins",
+    tie: "Tie"
   }
 
+  MODES={
+    "R" => "AI::Random"
+    "L" => "AI::Losing"
+    "W" => "AI::Winning"
+  }
+
+
+
+
+  attr_reader :score, :ai_move, :player_move
+
+  def initialize
+    @score = Score.new 
+  end 
+
   def play
-    player movie = get_player_input 
-    until player_move == 'q'
-      ai_move = ["R","P","S"].sample 
-      puts "AI played #{ai_move}"
-      puts OUTCOMES[[player_move, ai_move]]
-      player_move = get_player_input
+    choose_ai_mode
+    get player_move 
+    until player_move.label == 'Q'
+      get_ai_move
+      record_outcome
+      output_results
+      get_player_move
     end
   end 
 
-  def get_player_input
+  private 
+
+  def get_player_move
     print "Your move? (R/P/S, q to quit) > "
-    gets.chomp
+    @player_move = Move.new(gets.chomp.upcase)
   end 
+
+  def get_ai_move
+    @ai_move = Move:new(AI::Random.new(player_move).label 
+    puts "AI played #{ai_move}"
+  end
+
+  def result
+    RESULTS[outcome]
+  end
+
+  def record_outcome
+    score.record(outcome)
+  end
+
+  def outcome
+    player_move.outcome(ai_move)
+  end
+
+  def output_results
+    puts result
+    puts "player has won #{score.percentage_of_wins}%"
+  end  
+
+  def choose_ai_mode
+    print "Choose AI mode ([R]andom, [W]inning, [L]osing) > "
+    @ai_mode = gets.chomp.upcase 
+
+  end
 end 
+
 
 
