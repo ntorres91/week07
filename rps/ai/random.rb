@@ -1,13 +1,15 @@
 module AI
-  class Random
-    def initialize(move)
+  class Random 
+    attr_reader :move
 
-    end
-
-
-
-    def lable
-      Move.NAMES.keys.sample
-    end 
+  def initialize(move)
+    @move = move
   end
+
+
+
+
+
+
 end 
+
