@@ -13,9 +13,7 @@ class RPS
   }
 
 
-
-
-  attr_reader :score, :ai_move, :player_move
+  attr_reader :score, :ai_move, :player_move, :ai_mode 
 
   def initialize
     @score = Score.new 
@@ -40,7 +38,7 @@ class RPS
   end 
 
   def get_ai_move
-    @ai_move = Move:new(AI::Random.new(player_move).label 
+    @ai_move = Move:new(MODES[ai_mode].new(player_move).label) 
     puts "AI played #{ai_move}"
   end
 

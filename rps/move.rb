@@ -1,4 +1,6 @@
 class Move
+ 
+
 
   NAMES={
     "R" => "Rock",
