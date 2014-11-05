@@ -29,7 +29,6 @@ class Database
 
   def remove_whitespace_from(record)
     record.each do |key, value|
-      value.strip!
     end
   end
 

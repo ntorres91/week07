@@ -23,4 +23,5 @@ while input != "t"
   record = Record.new(find_input) || NullRecord.new
 
   puts record.to_s 
+  
 end
